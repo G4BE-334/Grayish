@@ -13,18 +13,18 @@ class Shop
 {
     private:
     int slots;
-    Item* store;
+    Item* store[45];
     int occSlots;
-    bool occupied[];
 
     public:
-    
+    bool occupied[];
+
     // Change Stats
     Shop();
     void setSlots(int s);
-    void setStore(Item i);
+    void setStore(Item* i);
     
-    Item* getStore();
+    Item** getStore();
     int getOccSlots();
 
     void displayStore();

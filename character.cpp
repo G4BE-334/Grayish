@@ -187,7 +187,7 @@ void Character::displayAttributes()
 
 void Character::block() { blocking = true; }
 
-void Character::addEquipment(Equipment e)
+void Character::addEquipment(Equipment* e)
 {
     inventory.setEquipments(e);
 }
@@ -240,16 +240,16 @@ void Character::setCombatAtt(Armor a)
     combatAtt[4] = attributes[4] + a.attributes[2];
 }
 
-void Character::setEquipment(Equipment &e)
+void Character::setEquipment(Equipment* e)
 {
-    if (e.getTypeE() == "armor") {
-        Armor &a = dynamic_cast<Armor&>(e);
+    if (e->getTypeE() == "armor") {
+        Armor &a = dynamic_cast<Armor&>(*e);
         equipments[0] = a;
         setCombatAtt(a);
     }
-    else if (e.getTypeE() == "weapon")
+    else if (e->getTypeE() == "weapon")
     {
-        Weapon &w = dynamic_cast<Weapon&>(e);
+        Weapon &w = dynamic_cast<Weapon&>(*e);
         if (w.getIsTwoH() == true) {
             cout << "This is a two handed weapon. Equipping it will occupy both hand slots" << flush << endl;
             usleep(1500000);
@@ -277,7 +277,7 @@ void Character::setEquipment(Equipment &e)
         }
     }
     else {
-        Weapon &w = dynamic_cast<Weapon&>(e);
+        Weapon &w = dynamic_cast<Weapon&>(*e);
         if (twoHand)
         {
             cout <<+ "Sorry, you cannot equip this shield because you are holding a two handed weapon." << endl;     
@@ -342,11 +342,14 @@ void Character::setEquipment(Equipment &e)
 
 void Character::displayEquipments() {
     for (int i = 0; i < inventory.getOccSlots(); i++) {
-        if (inventory.getEquipments()[i].getName() != "nothing") {
-            cout << i << "|| " << inventory.getEquipments()[i].getName() << " \t ";
+        if (inventory.getOccupied()[i]) {
+            if (inventory.getEquipments()[i]->getName() != "nothing") {
+                cout << i << "|| " << inventory.getEquipments()[i]->getName() << " \t ";
+            }
         }
     }
 }
+
 
 void Character::displayInv()
 {
@@ -373,9 +376,9 @@ void Character::displayEquipped()
     }
 }
 
-void Character::canEquip(int a, Equipment e)
+void Character::canEquip(int a, Equipment* e)
 {
-    if (a == e.getSlot()) {
+    if (a == e->getSlot()) {
         setEquipment(e);
         }
     else {

@@ -89,13 +89,13 @@ class Character
     void displayEquipments(); // Display equipments
 
     // Other
-    void addEquipment(Equipment e); // Add equipment to inventory
+    void addEquipment(Equipment* e); // Add equipment to inventory
     void addConsumable(Consumable c); // Add consumable to inventory
     void block(); // Block attack
-    void setEquipment(Equipment& e);
+    void setEquipment(Equipment* e);
     void setCombatAtt(Weapon w);
     void setCombatAtt(Armor a);
-    void canEquip(int a, Equipment e);
+    void canEquip(int a, Equipment* e);
 
     // void setAllW(Weapon w);
     // void setAllA(Armor a);

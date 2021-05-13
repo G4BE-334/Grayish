@@ -16,7 +16,7 @@ class Inventory
 {
     private:
     int slots = 15;
-    Equipment* equipments;
+    Equipment* equipments[15];
     Consumable* consumables;
     int occSlots;
     bool occupied[30] = {false};
@@ -26,12 +26,13 @@ class Inventory
     // Change Stats
     Inventory();
     void setSlots(int s);
-    void setEquipments(Equipment e);
+    void setEquipments(Equipment* e);
     void setConsumables(Consumable e);
 
     void displayItems();
 
-    Equipment* getEquipments();
+    Equipment& getEquipments(int i);
+    Equipment** getEquipments();
     Consumable* getConsumables();
     int getSlots();
     bool* getOccupied();
