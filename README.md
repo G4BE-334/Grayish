@@ -1,2 +1,2 @@
 # Grayish
- Text based thrash game
+ Text-based RPG game project
